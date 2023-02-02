@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -19,14 +19,16 @@ function App(): JSX.Element {
 
   const [data, setData] = useState<any>([]);
 
-  fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-    .then(raw => {
-      return raw.json();
-    })
-    .then(response => {
-      console.log(response);
-      setData(response);
-    });
+  useEffect(() => {
+    fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+      .then(raw => {
+        return raw.json();
+      })
+      .then(response => {
+        console.log(response.height);
+        setData(response);
+      });
+  }, []);
 
   return (
     <SafeAreaView style={backgroundStyle}>
