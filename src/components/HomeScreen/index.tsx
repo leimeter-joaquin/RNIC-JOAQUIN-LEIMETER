@@ -1,39 +1,56 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, View, StatusBar, Text, StyleSheet} from 'react-native';
+import {SafeAreaView, View, StatusBar, Text, FlatList} from 'react-native';
+import styles from './styles';
+import tasksArray from '../../constants/mock';
+import {Task} from '../../types/tasks';
+import Card from '../Card';
 
 function HomeScreen(): JSX.Element {
-  const [data, setData] = useState<any>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-      .then(raw => {
-        return raw.json();
-      })
-      .then(response => {
-        console.log(response.height);
-        setData(response);
-      });
+    if (tasksArray) {
+      setTasks(tasksArray);
+    }
   }, []);
+
+  /**
+   *
+   * @param id id of the task to modify
+   */
+  const setTaskStatus = (id: string) => {
+    setTasks(prevState => {
+      const newTasks = prevState.map(task => {
+        if (task.id === id) {
+          task.done = !task.done;
+        }
+        return task;
+      });
+
+      return newTasks;
+    });
+  };
 
   return (
     <SafeAreaView>
-      <StatusBar />
+      <StatusBar backgroundColor="#61dafb" />
+
+      <FlatList
+        data={tasks}
+        renderItem={({item}) => (
+          <Card task={item} setTaskStatus={setTaskStatus} />
+        )}
+      />
+
       <View>
         <Text style={styles.greetings}>Hello</Text>
       </View>
 
       <View>
-        <Text style={styles.greetings}>{JSON.stringify(data)}</Text>
+        <Text>{JSON.stringify(tasks, null, 2)}</Text>
       </View>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  greetings: {
-    fontSize: 30,
-    color: '#59c3dd',
-  },
-});
 
 export default HomeScreen;
