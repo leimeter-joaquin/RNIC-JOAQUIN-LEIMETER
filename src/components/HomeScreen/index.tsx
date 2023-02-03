@@ -1,22 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  View,
-  StatusBar,
-  useColorScheme,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import {SafeAreaView, View, StatusBar, Text, StyleSheet} from 'react-native';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+function HomeScreen(): JSX.Element {
   const [data, setData] = useState<any>([]);
 
   useEffect(() => {
@@ -31,11 +16,8 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
+    <SafeAreaView>
+      <StatusBar />
       <View>
         <Text style={styles.greetings}>Hello</Text>
       </View>
@@ -54,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default HomeScreen;
