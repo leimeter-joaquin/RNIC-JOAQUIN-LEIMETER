@@ -1,6 +1,8 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {Task} from '../../types/tasks';
+import styles from './styles';
+// import {useColorScheme} from 'react-native';
 
 interface CardProps {
   task: Task;
@@ -8,16 +10,18 @@ interface CardProps {
 }
 
 const Card = ({task, setTaskStatus}: CardProps) => {
+  // const colorScheme = useColorScheme();
   return (
     <View>
-      <Text>{task.title}</Text>
-      <Text>{task.description}</Text>
-      <Text>{task.done.toString()}</Text>
       <TouchableOpacity
+        style={[styles.cardContainer, task.done && styles.done]}
         onPress={() => {
           setTaskStatus(task.id);
         }}>
-        <Text>Press</Text>
+        <Text style={styles.title}>{task.title}</Text>
+        <Text numberOfLines={2} style={styles.description}>
+          {task.description}
+        </Text>
       </TouchableOpacity>
     </View>
   );
