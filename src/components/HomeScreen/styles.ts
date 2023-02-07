@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     backgroundColor: isAndroid ? '#FFD166' : '#93E1FF',
-    color: isAndroid ? '#26547C' : '#93E1FF',
+    color: isAndroid ? '#26547C' : '#121212',
     borderRadius: 5,
   },
   button: {

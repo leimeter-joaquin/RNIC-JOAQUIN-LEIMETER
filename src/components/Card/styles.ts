@@ -4,7 +4,6 @@ const isAndroid = Platform.OS === 'android';
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: 'white',
-    flex: 7,
     gap: 4,
     padding: 16,
     minHeight: 70,
@@ -24,7 +23,6 @@ const styles = StyleSheet.create({
     color: isAndroid ? '#26547C' : '#26547C',
   },
   description: {
-    flex: 6,
     color: isAndroid ? '#26547C' : '#26547C',
   },
   done: {

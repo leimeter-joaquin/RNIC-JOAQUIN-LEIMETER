@@ -10,8 +10,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
-  TouchableWithoutFeedback,
   AppState,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import styles from './styles';
 import tasksArray from '../../constants/mock';
@@ -61,10 +61,6 @@ function HomeScreen(): JSX.Element {
   };
 
   const addTask = () => {
-    if (newTitle || newDescription) {
-      return;
-    }
-
     setTasks(prevState => {
       const newTasks: Task[] = [
         ...prevState,
@@ -99,7 +95,7 @@ function HomeScreen(): JSX.Element {
           renderItem={({item}) => (
             <Card task={item} setTaskStatus={setTaskStatus} />
           )}
-          ListEmptyComponent={() => EmptyList()}
+          ListEmptyComponent={EmptyList}
         />
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           {/* I had to wrap the inputs and button on a view because this component wouldn't let me have multiple children nodes. */}
@@ -119,7 +115,10 @@ function HomeScreen(): JSX.Element {
               returnKeyType="next"
               onChangeText={setNewDescription}
             />
-            <TouchableHighlight style={styles.button} onPress={addTask}>
+            <TouchableHighlight
+              style={styles.button}
+              onPress={addTask}
+              disabled={!newTitle || !newDescription}>
               <Text style={styles.buttonText}>Press</Text>
             </TouchableHighlight>
           </View>
