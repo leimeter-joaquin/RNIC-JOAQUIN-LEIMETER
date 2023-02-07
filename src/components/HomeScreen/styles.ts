@@ -1,12 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// import styled from 'styled-components/native';
 import {Platform, StyleSheet} from 'react-native';
 const isAndroid = Platform.OS === 'android';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: isAndroid ? '#F8FBF7' : '#26547C',
-  },
   cardsContainer: {
     backgroundColor: isAndroid ? '#F8FBF7' : '#26547C',
     padding: 8,
