@@ -1,10 +1,16 @@
 // import styled from 'styled-components/native';
 import {Platform, StyleSheet} from 'react-native';
 const isAndroid = Platform.OS === 'android';
+import styled from 'styled-components/native';
+
+export const ListJoaco = styled.FlatList`
+  background-color: transparent;
+  padding: 12px;
+`;
 
 const styles = StyleSheet.create({
   cardsContainer: {
-    backgroundColor: isAndroid ? '#F8FBF7' : '#26547C',
+    backgroundColor: 'transparent',
     padding: 8,
     gap: 24,
   },

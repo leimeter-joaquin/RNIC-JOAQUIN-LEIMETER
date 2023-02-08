@@ -1,16 +1,20 @@
 import {Platform, StyleSheet} from 'react-native';
 const isAndroid = Platform.OS === 'android';
 
+import styled from 'styled-components/native';
+
+export const CardWrapper = styled.TouchableOpacity<{done: boolean}>`
+  background-color: ${({done}) => (done ? 'red' : 'green')};
+  margin: 10px 0;
+  padding: 10px;
+  flex-direction: row;
+`;
+
+export const TitleTaskContainer = styled.View`
+  background-color: red;
+`;
+
 const styles = StyleSheet.create({
-  cardContainer: {
-    backgroundColor: 'white',
-    gap: 4,
-    padding: 16,
-    minHeight: 70,
-    borderWidth: isAndroid ? 1 : 0,
-    borderColor: isAndroid ? '#FFD166' : '#FFFCF9',
-    borderRadius: 8,
-  },
   cardContainerShadowProps: {
     shadowColor: '#171717',
     shadowOpacity: 0.2,

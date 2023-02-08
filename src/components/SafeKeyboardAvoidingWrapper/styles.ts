@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
 
 export const Wrapper = styled.SafeAreaView`
-  flex-grow: 1;
-  background-color: #26547c;
+  flex: 1;
+  background-color: ${({theme}) => theme.colors.background};
 `;
 
 export const AvoidKeyboard = styled.KeyboardAvoidingView`
-  background-color: #26547c;
-  flex-grow: 1;
+  flex: 1;
+  background-color: transparent;
 `;

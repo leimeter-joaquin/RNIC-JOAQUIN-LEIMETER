@@ -3,18 +3,17 @@ import {
   View,
   Text,
   TextInput,
-  FlatList,
   Keyboard,
   AppState,
   TouchableWithoutFeedback,
   TouchableHighlight,
 } from 'react-native';
-import styles from './styles';
+import styles, {ListJoaco} from './styles';
 import tasksArray from '../../constants/mock';
 import {Task} from '../../types/tasks';
 import Card from '../Card';
 import moveFocusTo from '../../utils/moveFocusTo';
-import KeyboardAvoidingWrapper from '../KeyboardAvoidingWrapper';
+import SafeKeyboardAvoidingWrapper from '../SafeKeyboardAvoidingWrapper';
 
 const EmptyList = () => <Text>EmptyList</Text>;
 
@@ -64,6 +63,10 @@ function HomeScreen(): JSX.Element {
           title: newTitle,
           description: newDescription,
           done: false,
+          image: {
+            src: '',
+            alt: '',
+          },
         },
       ];
 
@@ -79,12 +82,11 @@ function HomeScreen(): JSX.Element {
   const secondInput = useRef<TextInput>(null);
 
   return (
-    <KeyboardAvoidingWrapper>
-      <FlatList
-        contentContainerStyle={styles.cardsContainer}
+    <SafeKeyboardAvoidingWrapper>
+      <ListJoaco
         data={tasks}
         renderItem={({item}) => (
-          <Card task={item} setTaskStatus={setTaskStatus} />
+          <Card task={item as Task} setTaskStatus={setTaskStatus} />
         )}
         ListEmptyComponent={EmptyList}
       />
@@ -114,7 +116,7 @@ function HomeScreen(): JSX.Element {
           </TouchableHighlight>
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingWrapper>
+    </SafeKeyboardAvoidingWrapper>
   );
 }
 
