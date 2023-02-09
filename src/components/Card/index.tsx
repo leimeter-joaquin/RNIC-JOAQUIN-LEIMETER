@@ -1,38 +1,52 @@
 import React from 'react';
+import {Text} from 'react-native';
 import {Task} from '../../types/tasks';
-import {CardWrapper} from './styles';
-// import {useColorScheme} from 'react-native';
+import Check from '../icons/Check';
+import Edit from '../icons/Edit';
+import X from '../icons/X';
+import {
+  CardWrapper,
+  CloseButton,
+  ControlButton,
+  ControlsContainer,
+  TaskImage,
+  TitleTaskContainer,
+  TitleText,
+} from './styles';
 
 interface CardProps {
   task: Task;
   setTaskStatus: (id: string) => void;
+  removeTask: (id: string) => void;
 }
 
-const Card = ({task, setTaskStatus}: CardProps) => {
-  // const colorScheme = useColorScheme();
+const Card = ({task, setTaskStatus, removeTask}: CardProps) => {
   return (
-    <CardWrapper
-      done={task.done}
-      onPress={() => {
-        setTaskStatus(task.id);
-      }}>
-      {/* {task.image.src ? (
-        <Image source={{uri: task.image.src}} alt={task.image.alt} />
-      ) : (
-        <Text>asd</Text>
-      )}
-      <Image
-        source={{
-          uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-        }}
-      /> */}
-      {/* <TitleTaskContainer>
-        <Text style={styles.title}>{task.title}</Text>
-        <Text numberOfLines={2} style={styles.description}>
-          {task.description}
-        </Text>
-      </TitleTaskContainer> */}
-      {/* <CloseButton /> */}
+    <CardWrapper done={task.done}>
+      {task.image.src ? (
+        <TaskImage source={{uri: task.image.src}} resizeMode={'center'} />
+      ) : null}
+      <TitleTaskContainer>
+        <TitleText>{task.title}</TitleText>
+        <Text numberOfLines={3}>{task.description}</Text>
+      </TitleTaskContainer>
+      <ControlsContainer>
+        <ControlButton>
+          <Edit color="black" />
+        </ControlButton>
+        <ControlButton
+          onPress={() => {
+            setTaskStatus(task.id);
+          }}>
+          <Check color="black" />
+        </ControlButton>
+      </ControlsContainer>
+      <CloseButton
+        onPress={() => {
+          removeTask(task.id);
+        }}>
+        <X color="black" />
+      </CloseButton>
     </CardWrapper>
   );
 };

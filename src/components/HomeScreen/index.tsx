@@ -1,14 +1,19 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {
-  View,
   Text,
   TextInput,
   Keyboard,
   AppState,
   TouchableWithoutFeedback,
-  TouchableHighlight,
 } from 'react-native';
-import styles, {ListJoaco} from './styles';
+import {
+  CardList,
+  FormButton,
+  FormButtonText,
+  FormContainer,
+  FormInput,
+  PlusIcon,
+} from './styles';
 import tasksArray from '../../constants/mock';
 import {Task} from '../../types/tasks';
 import Card from '../Card';
@@ -79,42 +84,48 @@ function HomeScreen(): JSX.Element {
     });
   };
 
+  const removeTask = (id: string) => {
+    setTasks(prevState => {
+      return prevState.filter(task => task.id !== id);
+    });
+  };
+
   const secondInput = useRef<TextInput>(null);
 
   return (
     <SafeKeyboardAvoidingWrapper>
-      <ListJoaco
+      <CardList
         data={tasks}
         renderItem={({item}) => (
-          <Card task={item as Task} setTaskStatus={setTaskStatus} />
+          <Card
+            task={item as Task}
+            setTaskStatus={setTaskStatus}
+            removeTask={removeTask}
+          />
         )}
         ListEmptyComponent={EmptyList}
       />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         {/* I had to wrap the inputs and button on a view because this component wouldn't let me have multiple children nodes. */}
-        <View style={styles.form}>
-          <TextInput
-            style={styles.input}
+        <FormContainer>
+          <FormInput
             value={newTitle}
             onChangeText={setNewTitle}
             returnKeyType="next"
             blurOnSubmit={false}
             onSubmitEditing={() => moveFocusTo(secondInput)}
           />
-          <TextInput
+          <FormInput
             ref={secondInput}
-            style={styles.input}
             value={newDescription}
             returnKeyType="next"
             onChangeText={setNewDescription}
           />
-          <TouchableHighlight
-            style={styles.button}
-            onPress={addTask}
-            disabled={!newTitle || !newDescription}>
-            <Text style={styles.buttonText}>Press</Text>
-          </TouchableHighlight>
-        </View>
+          <FormButton onPress={addTask} disabled={!newTitle || !newDescription}>
+            <FormButtonText>Add</FormButtonText>
+            <PlusIcon color="black" />
+          </FormButton>
+        </FormContainer>
       </TouchableWithoutFeedback>
     </SafeKeyboardAvoidingWrapper>
   );
