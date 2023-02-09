@@ -1,5 +1,4 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {Task} from '../../types/tasks';
 import Check from '../icons/Check';
 import Edit from '../icons/Edit';
@@ -9,6 +8,7 @@ import {
   CloseButton,
   ControlButton,
   ControlsContainer,
+  DescriptionText,
   TaskImage,
   TitleTaskContainer,
   TitleText,
@@ -28,7 +28,7 @@ const Card = ({task, setTaskStatus, removeTask}: CardProps) => {
       ) : null}
       <TitleTaskContainer>
         <TitleText>{task.title}</TitleText>
-        <Text numberOfLines={3}>{task.description}</Text>
+        <DescriptionText numberOfLines={3}>{task.description}</DescriptionText>
       </TitleTaskContainer>
       <ControlsContainer>
         <ControlButton>

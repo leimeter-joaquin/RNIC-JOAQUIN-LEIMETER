@@ -23,8 +23,12 @@ export const TitleTaskContainer = styled.View`
 `;
 
 export const TitleText = styled.Text`
-  /* font-family: ; */
-  font-weight: 700;
+  font-family: 'Lato-Bold';
+  color: ${({theme}) => theme.colors.background};
+`;
+
+export const DescriptionText = styled.Text`
+  font-family: 'Lato-Regular';
   color: ${({theme}) => theme.colors.background};
 `;
 
