@@ -3,8 +3,9 @@ import styled from 'styled-components/native';
 export const CardWrapper = styled.View<{done: boolean}>`
   flex: 1;
   margin: 8px;
+  background-color: green;
   position: relative;
-  background-color: ${({theme}) => theme.colors.primary50};
+  /* background-color: ${({theme}) => theme.colors.primary50}; */
   opacity: ${({done}) => (done ? 0.2 : 1)};
   border-radius: 12px;
 `;
@@ -39,10 +40,4 @@ export const ControlButton = styled.TouchableHighlight`
   background-color: ${({theme}) => theme.colors.accent200};
   padding: 4px 12px;
   border-radius: 4px;
-`;
-
-export const CloseButton = styled.TouchableOpacity`
-  position: absolute;
-  top: 3px;
-  right: 3px;
 `;

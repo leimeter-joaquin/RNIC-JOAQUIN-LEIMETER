@@ -1,17 +1,27 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableHighlight} from 'react-native';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {Routes, ScreensParamsList} from '../../types/interfaces/navigation';
+import Form from '../../components/Form';
 
 type AddTaskScreenProps = BottomTabScreenProps<
   ScreensParamsList,
   Routes.ADD_TASK
 >;
 
-const AddTaskScreen = ({}: AddTaskScreenProps) => {
+const AddTaskScreen = ({navigation}: AddTaskScreenProps) => {
   return (
     <View>
-      <Text>AddTaskScreen</Text>
+      <View>
+        <TouchableHighlight
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Text>GoBack</Text>
+        </TouchableHighlight>
+        <Text>addTaskScreen</Text>
+        <Form />
+      </View>
     </View>
   );
 };

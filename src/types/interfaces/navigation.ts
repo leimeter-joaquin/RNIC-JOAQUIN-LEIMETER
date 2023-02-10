@@ -7,7 +7,9 @@ export enum Routes {
 
 export type ScreensParamsList = {
   [Routes.TAB_NAVIGATOR]: undefined;
-  [Routes.EDIT_TASK]: undefined;
+  [Routes.EDIT_TASK]: {
+    id: string;
+  };
   [Routes.TASK_LIST]: undefined;
   [Routes.ADD_TASK]: undefined;
 };

@@ -2,10 +2,8 @@ import React from 'react';
 import {Task} from '../../types/tasks';
 import Check from '../icons/Check';
 import Edit from '../icons/Edit';
-import X from '../icons/X';
 import {
   CardWrapper,
-  CloseButton,
   ControlButton,
   ControlsContainer,
   DescriptionText,
@@ -18,10 +16,11 @@ import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {Routes, ScreensParamsList} from '../../types/interfaces/navigation';
 
+import {useDispatch} from 'react-redux';
+import {setStatus} from '../../store/tasks/tasksSlice';
+
 interface CardProps {
   task: Task;
-  setTaskStatus: (id: string) => void;
-  removeTask: (id: string) => void;
 }
 
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
@@ -29,9 +28,10 @@ type ProfileScreenNavigationProp = NativeStackNavigationProp<
   Routes.TASK_LIST
 >;
 
-const Card = ({task, setTaskStatus, removeTask}: CardProps) => {
+const Card = ({task}: CardProps) => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
-
+  const dispatch = useDispatch();
+  console.log('rendered Card', task.id);
   return (
     <CardWrapper done={task.done}>
       {task.image.src ? (
@@ -42,22 +42,21 @@ const Card = ({task, setTaskStatus, removeTask}: CardProps) => {
         <DescriptionText numberOfLines={3}>{task.description}</DescriptionText>
       </TitleTaskContainer>
       <ControlsContainer>
-        <ControlButton onPress={() => navigation.navigate(Routes.EDIT_TASK)}>
+        <ControlButton
+          onPress={() =>
+            navigation.navigate(Routes.EDIT_TASK, {
+              id: task.id,
+            })
+          }>
           <Edit color="black" />
         </ControlButton>
         <ControlButton
           onPress={() => {
-            setTaskStatus(task.id);
+            dispatch(setStatus(task.id));
           }}>
           <Check color="black" />
         </ControlButton>
       </ControlsContainer>
-      <CloseButton
-        onPress={() => {
-          removeTask(task.id);
-        }}>
-        <X color="black" />
-      </CloseButton>
     </CardWrapper>
   );
 };

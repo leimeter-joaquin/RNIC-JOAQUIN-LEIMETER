@@ -2,6 +2,8 @@
 import styled from 'styled-components/native';
 
 export const CardList = styled.FlatList`
-  background-color: transparent;
+  flex: 1;
+  background-color: red;
+  height: 100%;
   padding: 12px;
 `;
