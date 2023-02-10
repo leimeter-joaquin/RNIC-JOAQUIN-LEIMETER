@@ -3,4 +3,8 @@ export type Task = {
   title: string;
   description: string;
   done: boolean;
+  image: {
+    src: string;
+    alt: string;
+  };
 };

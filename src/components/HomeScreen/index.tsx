@@ -1,23 +1,24 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {
-  SafeAreaView,
-  View,
-  StatusBar,
   Text,
-  TouchableHighlight,
   TextInput,
-  FlatList,
-  KeyboardAvoidingView,
-  Platform,
   Keyboard,
   AppState,
   TouchableWithoutFeedback,
 } from 'react-native';
-import styles from './styles';
+import {
+  CardList,
+  FormButton,
+  FormButtonText,
+  FormContainer,
+  FormInput,
+  PlusIcon,
+} from './styles';
 import tasksArray from '../../constants/mock';
 import {Task} from '../../types/tasks';
 import Card from '../Card';
 import moveFocusTo from '../../utils/moveFocusTo';
+import SafeKeyboardAvoidingWrapper from '../SafeKeyboardAvoidingWrapper';
 
 const EmptyList = () => <Text>EmptyList</Text>;
 
@@ -25,8 +26,6 @@ function HomeScreen(): JSX.Element {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
-
-  const isAndroid = Platform.OS === 'android';
 
   useEffect(() => {
     if (tasksArray) {
@@ -69,6 +68,10 @@ function HomeScreen(): JSX.Element {
           title: newTitle,
           description: newDescription,
           done: false,
+          image: {
+            src: '',
+            alt: '',
+          },
         },
       ];
 
@@ -81,50 +84,50 @@ function HomeScreen(): JSX.Element {
     });
   };
 
+  const removeTask = (id: string) => {
+    setTasks(prevState => {
+      return prevState.filter(task => task.id !== id);
+    });
+  };
+
   const secondInput = useRef<TextInput>(null);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        style={styles.container}>
-        <StatusBar barStyle={isAndroid ? 'light-content' : 'dark-content'} />
-        <FlatList
-          contentContainerStyle={styles.cardsContainer}
-          data={tasks}
-          renderItem={({item}) => (
-            <Card task={item} setTaskStatus={setTaskStatus} />
-          )}
-          ListEmptyComponent={EmptyList}
-        />
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          {/* I had to wrap the inputs and button on a view because this component wouldn't let me have multiple children nodes. */}
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              value={newTitle}
-              onChangeText={setNewTitle}
-              returnKeyType="next"
-              blurOnSubmit={false}
-              onSubmitEditing={() => moveFocusTo(secondInput)}
-            />
-            <TextInput
-              ref={secondInput}
-              style={styles.input}
-              value={newDescription}
-              returnKeyType="next"
-              onChangeText={setNewDescription}
-            />
-            <TouchableHighlight
-              style={styles.button}
-              onPress={addTask}
-              disabled={!newTitle || !newDescription}>
-              <Text style={styles.buttonText}>Press</Text>
-            </TouchableHighlight>
-          </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+    <SafeKeyboardAvoidingWrapper>
+      <CardList
+        data={tasks}
+        renderItem={({item}) => (
+          <Card
+            task={item as Task}
+            setTaskStatus={setTaskStatus}
+            removeTask={removeTask}
+          />
+        )}
+        ListEmptyComponent={EmptyList}
+      />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        {/* I had to wrap the inputs and button on a view because this component wouldn't let me have multiple children nodes. */}
+        <FormContainer>
+          <FormInput
+            value={newTitle}
+            onChangeText={setNewTitle}
+            returnKeyType="next"
+            blurOnSubmit={false}
+            onSubmitEditing={() => moveFocusTo(secondInput)}
+          />
+          <FormInput
+            ref={secondInput}
+            value={newDescription}
+            returnKeyType="next"
+            onChangeText={setNewDescription}
+          />
+          <FormButton onPress={addTask} disabled={!newTitle || !newDescription}>
+            <FormButtonText>Add</FormButtonText>
+            <PlusIcon color="black" />
+          </FormButton>
+        </FormContainer>
+      </TouchableWithoutFeedback>
+    </SafeKeyboardAvoidingWrapper>
   );
 }
 

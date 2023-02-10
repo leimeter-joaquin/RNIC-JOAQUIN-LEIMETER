@@ -1,29 +1,53 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
 import {Task} from '../../types/tasks';
-import styles from './styles';
-// import {useColorScheme} from 'react-native';
+import Check from '../icons/Check';
+import Edit from '../icons/Edit';
+import X from '../icons/X';
+import {
+  CardWrapper,
+  CloseButton,
+  ControlButton,
+  ControlsContainer,
+  DescriptionText,
+  TaskImage,
+  TitleTaskContainer,
+  TitleText,
+} from './styles';
 
 interface CardProps {
   task: Task;
   setTaskStatus: (id: string) => void;
+  removeTask: (id: string) => void;
 }
 
-const Card = ({task, setTaskStatus}: CardProps) => {
-  // const colorScheme = useColorScheme();
+const Card = ({task, setTaskStatus, removeTask}: CardProps) => {
   return (
-    <View>
-      <TouchableOpacity
-        style={[styles.cardContainer, task.done && styles.done]}
+    <CardWrapper done={task.done}>
+      {task.image.src ? (
+        <TaskImage source={{uri: task.image.src}} resizeMode={'center'} />
+      ) : null}
+      <TitleTaskContainer>
+        <TitleText>{task.title}</TitleText>
+        <DescriptionText numberOfLines={3}>{task.description}</DescriptionText>
+      </TitleTaskContainer>
+      <ControlsContainer>
+        <ControlButton>
+          <Edit color="black" />
+        </ControlButton>
+        <ControlButton
+          onPress={() => {
+            setTaskStatus(task.id);
+          }}>
+          <Check color="black" />
+        </ControlButton>
+      </ControlsContainer>
+      <CloseButton
         onPress={() => {
-          setTaskStatus(task.id);
+          removeTask(task.id);
         }}>
-        <Text style={styles.title}>{task.title}</Text>
-        <Text numberOfLines={2} style={styles.description}>
-          {task.description}
-        </Text>
-      </TouchableOpacity>
-    </View>
+        <X color="black" />
+      </CloseButton>
+    </CardWrapper>
   );
 };
 
