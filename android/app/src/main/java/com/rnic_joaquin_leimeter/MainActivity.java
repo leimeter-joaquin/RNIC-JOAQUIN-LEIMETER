@@ -1,6 +1,7 @@
 package com.rnic_joaquin_leimeter;
 import android.os.Bundle;
 import com.zoontek.rnbootsplash.RNBootSplash;
+import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -22,6 +23,11 @@ public class MainActivity extends ReactActivity {
   protected void onCreate(Bundle savedInstanceState) {
     RNBootSplash.init(this); // <- initialize the splash screen
     super.onCreate(savedInstanceState); // or super.onCreate(null) with react-native-screens
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
   }
 
   /**
