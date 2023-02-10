@@ -1,9 +1,10 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ListScreen from '../../screens/ListScreen';
 import EditTaskScreen from '../../screens/EditTaskScreen';
+import TabNavigator from '../tab';
+import {Routes, ScreensParamsList} from '../../types/interfaces/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<ScreensParamsList>();
 
 const StackNavigator = () => {
   return (
@@ -11,9 +12,16 @@ const StackNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      {/* put tab naigator here */}
-      <Stack.Screen name="LIST" component={ListScreen} options={{}} />
-      <Stack.Screen name="EDIT_TASK" component={EditTaskScreen} options={{}} />
+      <Stack.Screen
+        name={Routes.TAB_NAVIGATOR}
+        component={TabNavigator}
+        options={{}}
+      />
+      <Stack.Screen
+        name={Routes.EDIT_TASK}
+        component={EditTaskScreen}
+        options={{}}
+      />
     </Stack.Navigator>
   );
 };

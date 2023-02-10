@@ -4,11 +4,18 @@ import {CardList} from './styles';
 import tasksArray from '../../constants/mock';
 import {Task} from '../../types/tasks';
 import Card from '../../components/Card';
-import SafeKeyboardAvoidingWrapper from '../../components/SafeKeyboardAvoidingWrapper';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+
+import {Routes, ScreensParamsList} from '../../types/interfaces/navigation';
 
 const EmptyList = () => <Text>EmptyList</Text>;
 
-function ListScreen(): JSX.Element {
+type ListScreenProps = BottomTabScreenProps<
+  ScreensParamsList,
+  Routes.TASK_LIST
+>;
+
+const ListScreen = ({}: ListScreenProps) => {
   const [tasks, setTasks] = useState<Task[]>([]);
   // const [newTitle, setNewTitle] = useState('');
   // const [newDescription, setNewDescription] = useState('');
@@ -79,23 +86,19 @@ function ListScreen(): JSX.Element {
   // const secondInput = useRef<TextInput>(null);
 
   return (
-    <SafeKeyboardAvoidingWrapper>
-      <CardList
-        data={tasks}
-        renderItem={({item}) => (
-          <Card
-            task={item as Task}
-            setTaskStatus={setTaskStatus}
-            removeTask={removeTask}
-          />
-        )}
-        // ItemSeparatorComponent={() => <View style={{height: 10}} />}
-        ListEmptyComponent={EmptyList}
-      />
-
-      {/* <Form /> */}
-    </SafeKeyboardAvoidingWrapper>
+    <CardList
+      data={tasks}
+      renderItem={({item}) => (
+        <Card
+          task={item as Task}
+          setTaskStatus={setTaskStatus}
+          removeTask={removeTask}
+        />
+      )}
+      // ItemSeparatorComponent={() => <View style={{height: 10}} />}
+      ListEmptyComponent={EmptyList}
+    />
   );
-}
+};
 
 export default ListScreen;
