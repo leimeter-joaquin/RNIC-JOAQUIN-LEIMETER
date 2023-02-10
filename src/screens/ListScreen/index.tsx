@@ -1,17 +1,17 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {Text, TextInput, Keyboard, AppState} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text, AppState} from 'react-native';
 import {CardList} from './styles';
 import tasksArray from '../../constants/mock';
 import {Task} from '../../types/tasks';
-import Card from '../Card';
-import SafeKeyboardAvoidingWrapper from '../SafeKeyboardAvoidingWrapper';
+import Card from '../../components/Card';
+import SafeKeyboardAvoidingWrapper from '../../components/SafeKeyboardAvoidingWrapper';
 
 const EmptyList = () => <Text>EmptyList</Text>;
 
-function HomeScreen(): JSX.Element {
+function ListScreen(): JSX.Element {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [newTitle, setNewTitle] = useState('');
-  const [newDescription, setNewDescription] = useState('');
+  // const [newTitle, setNewTitle] = useState('');
+  // const [newDescription, setNewDescription] = useState('');
 
   useEffect(() => {
     if (tasksArray) {
@@ -45,30 +45,30 @@ function HomeScreen(): JSX.Element {
     });
   };
 
-  const addTask = () => {
-    setTasks(prevState => {
-      const newTasks: Task[] = [
-        ...prevState,
-        {
-          id: Date.now().toString(),
-          title: newTitle,
-          description: newDescription,
-          done: false,
-          image: {
-            src: '',
-            alt: '',
-          },
-        },
-      ];
+  // const addTask = () => {
+  //   setTasks(prevState => {
+  //     const newTasks: Task[] = [
+  //       ...prevState,
+  //       {
+  //         id: Date.now().toString(),
+  //         title: newTitle,
+  //         description: newDescription,
+  //         done: false,
+  //         image: {
+  //           src: '',
+  //           alt: '',
+  //         },
+  //       },
+  //     ];
 
-      setNewTitle('');
-      setNewDescription('');
+  //     setNewTitle('');
+  //     setNewDescription('');
 
-      Keyboard.dismiss();
+  //     Keyboard.dismiss();
 
-      return newTasks;
-    });
-  };
+  //     return newTasks;
+  //   });
+  // };
 
   const removeTask = (id: string) => {
     setTasks(prevState => {
@@ -76,7 +76,7 @@ function HomeScreen(): JSX.Element {
     });
   };
 
-  const secondInput = useRef<TextInput>(null);
+  // const secondInput = useRef<TextInput>(null);
 
   return (
     <SafeKeyboardAvoidingWrapper>
@@ -98,4 +98,4 @@ function HomeScreen(): JSX.Element {
   );
 }
 
-export default HomeScreen;
+export default ListScreen;
