@@ -1,20 +1,16 @@
 import styled from 'styled-components/native';
 
 export const CardWrapper = styled.View<{done: boolean}>`
+  flex: 1;
+  margin: 8px;
   position: relative;
   background-color: ${({theme}) => theme.colors.primary50};
   opacity: ${({done}) => (done ? 0.2 : 1)};
-  margin: 10px 0;
-  padding: 10px;
-  flex-direction: row;
-  min-height: 90px;
-  border-radius: 4px;
+  border-radius: 12px;
 `;
 
 export const TaskImage = styled.Image`
-  align-self: center;
-  margin: 0 10px 0 0;
-  min-height: 50px;
+  height: 50px;
   width: 50px;
 `;
 

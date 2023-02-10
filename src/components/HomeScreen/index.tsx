@@ -1,23 +1,9 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {
-  Text,
-  TextInput,
-  Keyboard,
-  AppState,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import {
-  CardList,
-  FormButton,
-  FormButtonText,
-  FormContainer,
-  FormInput,
-  PlusIcon,
-} from './styles';
+import {Text, TextInput, Keyboard, AppState} from 'react-native';
+import {CardList} from './styles';
 import tasksArray from '../../constants/mock';
 import {Task} from '../../types/tasks';
 import Card from '../Card';
-import moveFocusTo from '../../utils/moveFocusTo';
 import SafeKeyboardAvoidingWrapper from '../SafeKeyboardAvoidingWrapper';
 
 const EmptyList = () => <Text>EmptyList</Text>;
@@ -103,30 +89,11 @@ function HomeScreen(): JSX.Element {
             removeTask={removeTask}
           />
         )}
+        // ItemSeparatorComponent={() => <View style={{height: 10}} />}
         ListEmptyComponent={EmptyList}
       />
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        {/* I had to wrap the inputs and button on a view because this component wouldn't let me have multiple children nodes. */}
-        <FormContainer>
-          <FormInput
-            value={newTitle}
-            onChangeText={setNewTitle}
-            returnKeyType="next"
-            blurOnSubmit={false}
-            onSubmitEditing={() => moveFocusTo(secondInput)}
-          />
-          <FormInput
-            ref={secondInput}
-            value={newDescription}
-            returnKeyType="next"
-            onChangeText={setNewDescription}
-          />
-          <FormButton onPress={addTask} disabled={!newTitle || !newDescription}>
-            <FormButtonText>Add</FormButtonText>
-            <PlusIcon color="black" />
-          </FormButton>
-        </FormContainer>
-      </TouchableWithoutFeedback>
+
+      {/* <Form /> */}
     </SafeKeyboardAvoidingWrapper>
   );
 }
