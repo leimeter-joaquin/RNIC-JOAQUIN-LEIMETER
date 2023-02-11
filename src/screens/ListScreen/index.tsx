@@ -18,6 +18,7 @@ type ListScreenProps = BottomTabScreenProps<
 const ListScreen = ({}: ListScreenProps) => {
   const tasks = useSelector((state: RootState) => state.tasks);
 
+  console.log(tasks);
   useEffect(() => {
     const appStateSubscription = AppState.addEventListener(
       'change',
@@ -37,6 +38,8 @@ const ListScreen = ({}: ListScreenProps) => {
     <CardList
       data={tasks}
       renderItem={({item}) => <Card task={item as Task} />}
+      keyExtractor={item => (item as Task).id}
+      contentContainerStyle={{flex: 1}}
       // ItemSeparatorComponent={() => <View style={{height: 10}} />}
       ListEmptyComponent={EmptyList}
     />

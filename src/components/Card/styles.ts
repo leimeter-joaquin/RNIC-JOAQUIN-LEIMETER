@@ -1,11 +1,9 @@
 import styled from 'styled-components/native';
 
 export const CardWrapper = styled.View<{done: boolean}>`
-  flex: 1;
   margin: 8px;
-  background-color: green;
   position: relative;
-  /* background-color: ${({theme}) => theme.colors.primary50}; */
+  background-color: ${({theme}) => theme.colors.primary50};
   opacity: ${({done}) => (done ? 0.2 : 1)};
   border-radius: 12px;
 `;
@@ -15,9 +13,7 @@ export const TaskImage = styled.Image`
   width: 50px;
 `;
 
-export const TitleTaskContainer = styled.View`
-  flex: 1;
-`;
+export const TitleTaskContainer = styled.View``;
 
 export const TitleText = styled.Text`
   font-family: 'Lato-Bold';

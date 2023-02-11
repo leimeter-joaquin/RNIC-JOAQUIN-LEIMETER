@@ -8,7 +8,7 @@ export interface TasksState {
 }
 
 const initialState: TasksState = {
-  tasks: tasks,
+  tasks,
 };
 
 export const tasksSlice = createSlice({
@@ -20,7 +20,7 @@ export const tasksSlice = createSlice({
       action: PayloadAction<{title: string; description: string}>,
     ) => {
       const newTask: Task = {
-        id: action.payload.description,
+        id: new Date().getTime().toString(),
         title: action.payload.title,
         description: action.payload.description,
         done: false,
@@ -30,7 +30,6 @@ export const tasksSlice = createSlice({
         },
       };
       state.tasks.push(newTask);
-      console.log(state.tasks.length);
     },
     remove: (state, action: PayloadAction<string>) => {
       state.tasks = state.tasks.filter(task => task.id !== action.payload);
