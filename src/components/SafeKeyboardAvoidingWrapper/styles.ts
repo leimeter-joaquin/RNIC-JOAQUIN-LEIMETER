@@ -7,5 +7,5 @@ export const Wrapper = styled.SafeAreaView`
 
 export const AvoidKeyboard = styled.KeyboardAvoidingView`
   flex: 1;
-  background-color: transparent;
+  background-color: ${({theme}) => theme.colors.transparent};
 `;

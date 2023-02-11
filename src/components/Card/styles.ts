@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const CardWrapper = styled.View<{done: boolean}>`
   margin: 8px;
   position: relative;
-  background-color: ${({theme}) => theme.colors.primary50};
+  background-color: ${({theme}) => theme.colors.accent100};
   opacity: ${({done}) => (done ? 0.2 : 1)};
   border-radius: 12px;
 `;
@@ -33,7 +33,7 @@ export const ControlsContainer = styled.View`
 `;
 
 export const ControlButton = styled.TouchableHighlight`
-  background-color: ${({theme}) => theme.colors.accent200};
+  background-color: ${({theme}) => theme.colors.buttonHighlight};
   padding: 4px 12px;
   border-radius: 4px;
 `;

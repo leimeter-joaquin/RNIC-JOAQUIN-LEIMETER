@@ -8,15 +8,18 @@ declare module 'styled-components/native' {
 
 export const myTheme = {
   colors: {
-    background: '#00241B',
-    primary50: '#fdd7e0',
-    primary100: '#faa4b8',
-    pimary200: '#f87f9b',
-    primary300: '#F76F8E',
-    accent100: '#d3fefa',
-    accent200: '#58FCEC',
-    accent300: '#04ddc8',
+    background: '#25232A',
+    cardBackground: '#1C1B1F',
+    navigationBackground: '#2a2831',
+    inputBackground: '#49454F',
+    accent100: '#D0BCFF',
+    accent900: '#381E72',
+    buttonHighlight: '#4A4458',
+    navigationIconStroke: '#E8DEF8',
+    primaryText: '#E6E1E5',
+    secondaryText: '#CAC4D0',
     black: '#000',
     white: '#FFF',
+    transparent: 'transparent',
   },
 };

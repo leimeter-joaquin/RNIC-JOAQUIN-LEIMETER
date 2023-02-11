@@ -12,10 +12,10 @@ export const FormContainer = styled.View`
 export const FormInput = styled.TextInput`
   padding: 5px 10px;
   border-radius: 5px;
-  background-color: ${({theme}) => theme.colors.accent200};
+  background-color: ${({theme}) => theme.colors.inputBackground};
   color: ${({theme}) => theme.colors.background};
   border: 1px;
-  border-color: ${({theme}) => theme.colors.primary300};
+  border-color: ${({theme}) => theme.colors.cardBackground};
 `;
 
 export const FormButton = styled.TouchableOpacity`
@@ -25,7 +25,7 @@ export const FormButton = styled.TouchableOpacity`
   align-items: center;
   padding: 10px;
   border-radius: 4px;
-  background-color: ${({theme}) => theme.colors.pimary200};
+  background-color: ${({theme}) => theme.colors.accent100};
   align-self: center;
   opacity: ${({disabled}) => (disabled ? 0.5 : 1)};
 `;
