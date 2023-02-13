@@ -1,6 +1,6 @@
 // import styled from 'styled-components/native';
 import styled from 'styled-components/native';
-import Plus from '../icons/Plus';
+import Plus from '../../assets/icons/Plus';
 
 export const FormContainer = styled.View`
   padding: 20px;

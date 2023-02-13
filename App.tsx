@@ -6,6 +6,7 @@ import SafeKeyboardAvoidingWrapper from './src/components/SafeKeyboardAvoidingWr
 import Navigation from './src/navigation';
 import {store} from './src/store';
 import {Provider} from 'react-redux';
+import {Provider as PaperProvider} from 'react-native-paper';
 
 const App = () => {
   useEffect(() => {
@@ -13,11 +14,17 @@ const App = () => {
   }, []);
   return (
     <Provider store={store}>
-      <ThemeProvider theme={myTheme}>
-        <SafeKeyboardAvoidingWrapper>
-          <Navigation />
-        </SafeKeyboardAvoidingWrapper>
-      </ThemeProvider>
+      {/* This was installed to change the background color of the icon container in the Material bottom tab navigation component, don't judge */}
+      <PaperProvider
+        theme={{
+          colors: {secondaryContainer: `${myTheme.colors.buttonHighlight}`},
+        }}>
+        <ThemeProvider theme={myTheme}>
+          <SafeKeyboardAvoidingWrapper>
+            <Navigation />
+          </SafeKeyboardAvoidingWrapper>
+        </ThemeProvider>
+      </PaperProvider>
     </Provider>
   );
 };

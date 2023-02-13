@@ -1,7 +1,7 @@
 import React from 'react';
 import {Task} from '../../types/tasks';
-import Check from '../icons/Check';
-import Edit from '../icons/Edit';
+import Check from '../../assets/icons/Check';
+import Edit from '../../assets/icons/Edit';
 import {
   CardWrapper,
   ControlButton,
